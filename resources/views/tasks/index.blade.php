@@ -24,6 +24,6 @@
         </tbody>
     </table>
     @endif
-    
+    {!! link_to_route('signup.get', 'Signup', [], ['class' => 'btn btn-secondary']) !!}
     {!! link_to_route('tasks.create', '新規タスクの投稿', [], ['class' => 'btn btn-primary']) !!}
 @endsection

@@ -112,6 +112,7 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (\Auth::id() === $task->user_id) {
         $request->validate([
             'status' => 'required|max:10',
             'content' => 'required',
@@ -121,6 +122,7 @@ class TasksController extends Controller
         $task->content = $request->content;
         $task->status = $request->status;
         $task->save();
+        }
         
         return redirect('/');
     }
@@ -134,7 +136,10 @@ class TasksController extends Controller
     public function destroy($id)
     {
         $task = Task::findOrFail($id);
-        $task->delete();
+        
+        if (\Auth::id() === $task->user_id) {
+            $task->delete();
+        }
         
         return redirect('/');
     }
